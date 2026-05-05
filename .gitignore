@@ -1,0 +1,20 @@
+# Ignore the model weights
+backend/models/final_model/
+*.bin
+*.safetensors
+*.pth
+
+# Ignore the virtual environment
+env/
+venv/
+.env
+
+# Ignore Python cache and results
+__pycache__/
+*.pyc
+results/
+classification_results.csv
+
+# Ignore OS specific files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,130 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Background (green gradient) */
+body {
+  font-family: 'Inter', sans-serif;
+  background: radial-gradient(circle at top, #ffffff, #ffffff);
+  min-height: 100vh;
+  color: #000000;
+}
+
+
+
+/* Layout */
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Glass card */
+.glass-card {
+  width: 400px;
+  padding: 32px;
+  border-radius: 4px;
+
+  background: rgba(119, 215, 167, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  border: 2px solid rgba(0, 255, 119, 0.15);
+  box-shadow: 0 20px 60px rgba(0, 255, 150, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Title */
+.title {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  color: #080808;
+}
+
+/* Upload box */
+.upload-box {
+  border: 2px dashed rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.upload-box:hover {
+  border-color: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* Hide input */
+.upload-box input {
+  display: none;
+}
+
+/* Image preview */
+.preview {
+  border-radius: 10px;
+  max-width: 100%;
+}
+
+/* Button */
+.button {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #000000, #000000);
+  color: #ffffff;
+
+  transition: 0.2s;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 20px rgba(0, 255, 150, 0.4);
+}
+
+.button:disabled {
+  opacity: 0.9;
+  cursor: not-allowed;
+}
+
+/* Result */
+.result {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+
+  background: rgba(0, 255, 150, 0.1);
+  border: 1px solid rgba(0, 255, 150, 0.3);
+  color: #00ffa6;
+}
+
+/* Loader */
+.loader {
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-top: 3px solid #00ffa6;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin: auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
