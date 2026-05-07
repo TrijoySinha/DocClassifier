@@ -128,3 +128,92 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.pdf-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: #080808;
+}
+
+.pdf-results-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 250px; /* Scroll if PDF is long */
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.pdf-results-container h3 {
+  font-size: 16px;
+  color: #080808;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+.page-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.label-badge {
+  background: #000000;
+  color: #ffffff;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+/* --- Clear Button --- */
+.file-info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.clear-btn {
+  background: transparent;
+  border: 1px solid #000000;
+  color: #000000;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.clear-btn:hover {
+  background: #000000;
+  color: #ffffff;
+}
+
+/* Error styling */
+.result.error {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: rgba(255, 0, 0, 0.3);
+  color: #d00000;
+}
+
+/* Custom Scrollbar for PDF list */
+.pdf-results-container::-webkit-scrollbar {
+  width: 4px;
+}
+.pdf-results-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}

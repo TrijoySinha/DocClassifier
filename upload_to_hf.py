@@ -1,12 +1,12 @@
 import os
 from huggingface_hub import HfApi
 
-# --- CONFIGURATION ---
-YOUR_TOKEN = os.getenv("HF_TOKEN")  # Paste your new token here
+# CONFIGURATION 
+YOUR_TOKEN = os.getenv("HF_TOKEN")  
 YOUR_USERNAME = "Trijoy"
 MODEL_NAME = "my-vit-classifier"
 SOURCE_FOLDER = "backend/models/final_model"
-# ---------------------
+
 
 api = HfApi(token=YOUR_TOKEN)
 repo_id = f"{YOUR_USERNAME}/{MODEL_NAME}"

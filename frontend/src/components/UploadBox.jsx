@@ -4,51 +4,110 @@ import { predictImage } from "../api/predict";
 export default function UploadBox() {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState(null);
-  const [result, setResult] = useState("");
+  const [results, setResults] = useState(null); 
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const f = e.target.files[0];
-    setFile(f);
-    setPreview(URL.createObjectURL(f));
+    const selectedFile = e.target.files[0];
+    if (!selectedFile) return;
+
+    setFile(selectedFile);
+    setResults(null); // Clear previous results on new selection
+
+    // Preview logic: only generate URL for images
+    if (selectedFile.type.startsWith("image/")) {
+      setPreview(URL.createObjectURL(selectedFile));
+    } else {
+      setPreview(null); // No preview for PDFs
+    }
   };
 
   const handleUpload = async () => {
     if (!file) return;
 
     setLoading(true);
-    setResult("");
+    setResults(null);
 
     try {
+      // res expects: { type: "image", data: "label" } OR { type: "pdf", data: [...] }
       const res = await predictImage(file);
-      setResult(res.prediction || res.label);
+      setResults(res);
     } catch (err) {
-      setResult("Error");
+      console.error("Upload Error:", err);
+      setResults({ error: "Classification failed. Please try again." });
+    } finally {
+      setLoading(false);
     }
+  };
 
-    setLoading(false);
+  const clearSelection = () => {
+    setFile(null);
+    setPreview(null);
+    setResults(null);
   };
 
   return (
     <div className="glass-card">
       <div className="title">Document Classifier</div>
 
-      <label className="upload-box">
-        Click to upload
-        <input type="file" onChange={handleChange} />
-      </label>
+      {!file ? (
+        <label className="upload-box">
+          Click to upload (IMG or PDF)
+          <input 
+            type="file" 
+            accept=".jpg,.jpeg,.png,.pdf" 
+            onChange={handleChange} 
+            hidden 
+          />
+        </label>
+      ) : (
+        <div className="file-info-container">
+            {preview ? (
+                <img src={preview} className="preview" alt="Preview" />
+            ) : (
+                <div className="pdf-placeholder">
+                    <span style={{ fontSize: "3rem" }}>📄</span>
+                    <p>{file.name}</p>
+                </div>
+            )}
+            <button className="clear-btn" onClick={clearSelection}>Change File</button>
+        </div>
+      )}
 
-      {preview && <img src={preview} className="preview" />}
-
-      <button
-        className="button"
-        onClick={handleUpload}
+      <button 
+        className="button" 
+        onClick={handleUpload} 
         disabled={!file || loading}
       >
-        {loading ? <div className="loader"></div> : "Predict"}
+        {loading ? <div className="loader"></div> : "Predict Content"}
       </button>
 
-      {result && <div className="result">{result}</div>}
+      {/* --- Error Handling --- */}
+      {results?.error && (
+        <div className="result error">{results.error}</div>
+      )}
+
+      {/* --- Single Image Result --- */}
+      {results?.type === "image" && (
+        <div className="result">
+            <span>Prediction:</span> <strong>{results.data}</strong>
+        </div>
+      )}
+
+      {/* --- PDF Multi-page Results --- */}
+      {results?.type === "pdf" && (
+        <div className="pdf-results-container">
+          <h3>PDF Analysis</h3>
+          <div className="results-list">
+            {results.data.map((item) => (
+              <div key={item.page} className="page-row">
+                <span>Page {item.page}</span>
+                <span className="label-badge">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
