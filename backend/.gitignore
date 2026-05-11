@@ -1,0 +1,50 @@
+# ---------------- ENV FILES ----------------
+.env
+*.env
+
+# ---------------- PYTHON ----------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# ---------------- VIRTUAL ENV ----------------
+.venv/
+venv/
+env/
+
+# ---------------- MODEL FILES ----------------
+models/
+*.bin
+*.safetensors
+*.pt
+*.pth
+
+# ---------------- DATASETS / OUTPUTS ----------------
+*.csv
+*.xlsx
+*.parquet
+
+# ---------------- JUPYTER ----------------
+.ipynb_checkpoints/
+
+# ---------------- VSCODE ----------------
+.vscode/
+
+# ---------------- FRONTEND ----------------
+frontend/node_modules/
+frontend/dist/
+
+# ---------------- OS FILES ----------------
+.DS_Store
+Thumbs.db
+
+# ---------------- CACHE ----------------
+.cache/
+.huggingface/
+hf_cache/
+
+# ---------------- BUILD / TEMP ----------------
+tmp/
+temp/
+*.log
