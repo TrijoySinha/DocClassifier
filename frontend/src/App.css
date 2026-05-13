@@ -1,16 +1,18 @@
-/* App.css */
 :root {
-  --primary: #000000;
-  --accent: #10b981;
-  --bg: #f3f4f6;
-  --text: #111827;
+  --primary: #111827;
+  --accent-success: #059669;
+  --accent-error: #dc2626;
+  --bg: #f9fafb;
+  --text: #1f2937;
+  --border: #e5e7eb;
 }
 
 body {
   margin: 0;
   background-color: var(--bg) !important;
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   color: var(--text) !important;
+  -webkit-font-smoothing: antialiased;
 }
 
 .container {
@@ -18,32 +20,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 24px;
 }
 
 .card {
   background: #ffffff;
-  padding: 40px;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  padding: 32px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   width: 100%;
-  max-width: 480px;
-  text-align: center;
+  max-width: 500px;
 }
 
 .title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
-  margin: 0 0 16px 0;
+  margin: 0 0 6px 0;
   color: var(--primary) !important;
-  text-transform: uppercase;
   letter-spacing: -0.5px;
 }
 
 .subtitle {
   color: #6b7280;
   font-size: 14px;
-  margin-bottom: 32px;
+  margin: 0 0 24px 0;
 }
 
 .upload-section {
@@ -53,11 +53,12 @@ body {
 }
 
 .file-input {
-  border: 2px solid #e5e7eb;
-  padding: 10px;
-  border-radius: 6px;
+  border: 1.5px solid var(--border);
+  padding: 12px;
+  border-radius: 8px;
   font-size: 14px;
-  background: #f9fafb;
+  background: #fdfdfd;
+  color: #4b5563;
 }
 
 .upload-button {
@@ -65,15 +66,15 @@ body {
   color: white !important;
   border: none;
   padding: 14px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 15px;
   cursor: pointer;
-  transition: transform 0.1s, opacity 0.2s;
+  transition: background-color 0.2s, opacity 0.2s;
 }
 
 .upload-button:hover {
-  transform: translateY(-1px);
+  background-color: #000000 !important;
 }
 
 .upload-button:disabled {
@@ -81,38 +82,99 @@ body {
   cursor: not-allowed;
 }
 
+/* Base Layout Config */
 .result-container {
-  margin-top: 32px;
+  margin-top: 24px;
   padding: 20px;
-  background: #ecfdf5;
-  border: 1.5px solid #10b981;
-  border-radius: 8px;
+  border-radius: 12px;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  gap: 16px;
   text-align: left;
 }
 
-.result-item {
-  display: flex;
-  flex-direction: column;
+/* Theme Configuration Blocks */
+.valid-layout {
+  background: #f0fdf4;
+  border: 1.5px solid #bbf7d0;
+}
+.valid-layout .res-tag { color: #166534; }
+.valid-layout .main-label { color: var(--accent-success); }
+
+.invalid-layout {
+  background: #fef2f2;
+  border: 1.5px solid #fecaca;
+}
+.invalid-layout .res-tag { color: #991b1b; }
+.invalid-layout .main-label { color: var(--accent-error); }
+
+/* Typography Formatting */
+.status-header {
+  border-bottom: 1px dashed rgba(0,0,0,0.1);
+  padding-bottom: 12px;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.border-top {
+  border-top: 1px dashed rgba(0,0,0,0.06);
+  padding-top: 12px;
 }
 
 .res-tag {
-  font-size: 10px;
-  font-weight: 800;
-  color: #065f46;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
   margin-bottom: 4px;
 }
 
 .res-value {
-  font-size: 18px;
-  font-weight: 800;
-  color: #064e3b;
+  font-weight: 700;
+  color: var(--primary);
 }
 
-.res-conf {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--accent);
+.main-label {
+  font-size: 22px;
+  letter-spacing: -0.5px;
+}
+
+.res-value.small {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.score-badge {
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+/* Dedicated Preview Window */
+.text-preview-box {
+  background: #ffffff;
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+}
+
+.preview-text {
+  margin: 6px 0 0 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+  color: #374151;
+  max-height: 120px;
+  overflow-y: auto;
 }
